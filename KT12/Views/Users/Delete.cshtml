@@ -1,0 +1,35 @@
+@model User
+@{
+    ViewData["Title"] = "Удаление пользователя";
+}
+
+<h1 class="h3 mb-4">Удаление пользователя</h1>
+
+<div class="alert alert-warning">
+    Вы действительно хотите удалить этого пользователя?
+    Вместе с ним будет <strong>безвозвратно удалён</strong> и его профиль (каскадное удаление).
+</div>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Логин</dt>
+            <dd class="col-sm-9">@Model.UserName</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+
+            <dt class="col-sm-3">ФИО</dt>
+            <dd class="col-sm-9">@(Model.Profile?.FullName ?? "—")</dd>
+
+            <dt class="col-sm-3">Телефон</dt>
+            <dd class="col-sm-9">@(Model.Profile?.PhoneNumber ?? "—")</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+</form>

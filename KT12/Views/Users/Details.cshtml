@@ -1,0 +1,54 @@
+@model User
+@{
+    ViewData["Title"] = "Профиль пользователя";
+    var profile = Model.Profile;
+    var avatar = profile?.AvatarUrl;
+}
+
+<h1 class="h3 mb-4">Профиль пользователя</h1>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3 text-center mb-3">
+                @if (!string.IsNullOrWhiteSpace(avatar))
+                {
+                    <img src="@avatar" alt="Аватар" class="avatar" referrerpolicy="no-referrer" />
+                }
+                else
+                {
+                    <span class="avatar-placeholder">@char.ToUpper(Model.UserName[0])</span>
+                }
+            </div>
+
+            <div class="col-md-9">
+                <h4 class="mb-0">@(profile?.FullName ?? Model.UserName)</h4>
+                <p class="text-muted">@Model.UserName</p>
+
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Email</dt>
+                    <dd class="col-sm-8">@Model.Email</dd>
+
+                    <dt class="col-sm-4">Дата регистрации</dt>
+                    <dd class="col-sm-8">@Model.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</dd>
+
+                    <dt class="col-sm-4">Дата рождения</dt>
+                    <dd class="col-sm-8">@(profile?.DateOfBirth?.ToString("dd.MM.yyyy") ?? "—")</dd>
+
+                    <dt class="col-sm-4">Телефон</dt>
+                    <dd class="col-sm-8">@(profile?.PhoneNumber ?? "—")</dd>
+
+                    <dt class="col-sm-4">Адрес</dt>
+                    <dd class="col-sm-8">@(profile?.Address ?? "—")</dd>
+
+                    <dt class="col-sm-4">О себе</dt>
+                    <dd class="col-sm-8">@(profile?.Bio ?? "—")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer bg-white">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Изменить</a>
+        <a asp-action="Index" class="btn btn-secondary">К списку</a>
+    </div>
+</div>
