@@ -1,0 +1,21 @@
+.avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #6c757d;
+    color: #fff;
+    font-size: 3.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.field-validation-error { font-size: .875rem; }
+.input-validation-error { border-color: #dc3545; }
